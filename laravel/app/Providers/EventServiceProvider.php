@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
@@ -12,39 +12,15 @@ class EventServiceProvider extends ServiceProvider
      *
      * @var array
      */
-    protected $listen =
-    [
-        'App\Events\UserRegistered' =>
-        [
-            'App\Listeners\SendUserWelcome',
-            'App\Listeners\SendAdminWelcome',
-        ],
-
-        'App\Events\FileUploaded' =>
-        [
-            'App\Listeners\SendAdminFileUploaded',
-        ],
-
-        'App\Events\FileChanged' =>
-        [
-            'App\Listeners\SendUserFileChanged',
-        ],
-
-        'App\Events\ForgotPassword' =>
-        [
-            'App\Listeners\SendUserMessage',
-        ],
-        'App\Events\SlotChanged' =>
-        [
-            'App\Listeners\SendAdminRemovedShift',
-            'App\Listeners\SendUserShiftConfirmation',
+    protected $listen = [
+        'App\Events\Event' => [
+            'App\Listeners\EventListener',
         ],
     ];
 
     /**
-     * Register any other events for your application.
+     * Register any events for your application.
      *
-     * @param  \Illuminate\Contracts\Events\Dispatcher  $events
      * @return void
      */
     public function boot()
